@@ -14,7 +14,7 @@ if 'logged' not in st.session_state:
     st.rerun()
 
 else:
-  if st.session_state['nip'] in trip.NIP:
+  if st.session_state['nip'] in trip.NIP.astype(str):
     mil = trip[trip.NIP==st.session_state['nip']]
     st.markdown(f'<h2>Seja bem vindo, {mil.POSTO.iloc[0]} {mil.NOME.iloc[0]}.</h2>', unsafe_allow_html=True)
     st.write('A fim de realizar um levantamento da necessidade de aquisição de uniformes OP3 e novos bonés de viagem, concita-se a todos que preencham o formulário a seguir.')
