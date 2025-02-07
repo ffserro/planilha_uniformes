@@ -32,5 +32,6 @@ else:
       if st.form_submit_button('Enviar'):
         tabela = st.session_state.conn.read(worksheet='PLANILHA')
         data = pd.DataFrame({'NIP':[st.session_state.nip], 'NOME':[mil.NOME.iloc[0]], 'TAM_OP3':[tam_op3], 'QTD_OP3':[qtd_op3], 'CIRCULO':[mil.CIRCULO.iloc[0]], 'QTD_BON':[qtd_bon]})
-        st.session_state.conn.update(worksheet='PLANILHA', data=data)
+        tabela = pd.concat([tabela, data]).drop_duplicates(keep='last')
+        st.session_state.conn.update(worksheet='PLANILHA', data=tabela)
         st.write(tam_op3, qtd_op3, qtd_bon)
