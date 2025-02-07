@@ -28,5 +28,3 @@ else:
       qtd_bon = st.number_input('Quantidade de Bonés de Viagem (Novo modelo)', step=1, format='%d')
       if st.form_submit_button('Enviar'):
         st.write(tam_op3, qtd_op3, qtd_bon)
-      
-    
