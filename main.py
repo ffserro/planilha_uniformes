@@ -11,6 +11,7 @@ if 'logged' not in st.session_state:
   st.session_state['nip'] = st.session_state['nip'].replace('.', '')
   if st.button('Enviar'):
     st.session_state['logged'] = True
+    st.session_state['inicio'] = False
     st.rerun()
 
 else:
