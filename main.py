@@ -25,13 +25,21 @@ else:
     st.write('A indenização destes uniformes será realizada através de desconto em BP ou pagamento de GRU para Oficiais, suboficiais e sargentos; e através de CREDIFARDA para cabos e marinheiros.')
     st.session_state['inicio'] = st.button('Preencher formulário')
   elif st.session_state['inicio']:
-    with st.form('formulario'):
-      tam_op3 = st.selectbox('Tamanho do Macacão Operativo OP3', ['-', 'P', 'M', 'G', 'GG', 'XG'])
-      qtd_op3 = st.number_input('Quantidade de Macacões Operativos', step=1, format='%d')
-      qtd_bon = st.number_input('Quantidade de Bonés de Viagem (Novo modelo)', step=1, format='%d')
-      if st.form_submit_button('Enviar'):
-        tabela = st.session_state.conn.read(worksheet='PLANILHA')
-        data = pd.DataFrame({'NIP':[st.session_state.nip], 'NOME':[mil.NOME.iloc[0]], 'TAM_OP3':[tam_op3], 'QTD_OP3':[qtd_op3], 'CIRCULO':[mil.CIRCULO.iloc[0]], 'QTD_BON':[qtd_bon]})
-        tabela = pd.concat([tabela, data]).drop_duplicates(keep='last')
-        st.session_state.conn.update(worksheet='PLANILHA', data=tabela)
-        st.write(tam_op3, qtd_op3, qtd_bon)
+    st.session_state['fim'] = False
+    if not st.session_state.fim:
+      with st.form('formulario'):
+        tam_op3 = st.selectbox('Tamanho do Macacão Operativo OP3', ['-', 'P', 'M', 'G', 'GG', 'XG'])
+        qtd_op3 = st.number_input('Quantidade de Macacões Operativos', step=1, format='%d')
+        qtd_bon = st.number_input('Quantidade de Bonés de Viagem (Novo modelo)', step=1, format='%d')
+        if st.form_submit_button('Enviar'):
+          tabela = st.session_state.conn.read(worksheet='PLANILHA')
+          data = pd.DataFrame({'NIP':[st.session_state.nip], 'NOME':[mil.NOME.iloc[0]], 'TAM_OP3':[tam_op3], 'QTD_OP3':[qtd_op3], 'CIRCULO':[mil.CIRCULO.iloc[0]], 'QTD_BON':[qtd_bon]})
+          tabela = pd.concat([tabela, data]).drop_duplicates(keep='last')
+          st.session_state.conn.update(worksheet='PLANILHA', data=tabela)
+          st.session_state['fim'] = True
+          st.success('Os dados foram enviados com sucesso!')
+    else:
+      st.header('Muito obrigado pela participação!')
+  else:
+    st.markdown('<h2>Este NIP não pertence a nossa Organização Militar, mas agradecemos pelo interesse.</h2>', unsafe_allow_html=True)
+
