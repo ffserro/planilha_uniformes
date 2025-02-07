@@ -4,8 +4,6 @@ import pandas as pd
 trip = pd.read_csv('./tripulacao.csv', delimiter=';')
 trip['NIP'] = trip.NIP.str.replace('.', '')
 
-st.dataframe(trip)
-
 st.title('Aquisição de uniformes')
 
 if 'logged' not in st.session_state:
@@ -17,4 +15,4 @@ if 'logged' not in st.session_state:
 
 else:
   mil = trip[trip.NIP==st.session_state['nip']]
-  st.write(mil)
+  st.markdown(f'##Seja bem vindo, {mil.POSTO} {mil.NOME}.')
