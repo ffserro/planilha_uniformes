@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-trip = df.read_csv('./tripulacao.csv', delimiter=';')
+trip = pd.read_csv('./tripulacao.csv', delimiter=';')
 
 st.dataframe(trip)
 
