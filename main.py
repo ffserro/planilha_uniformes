@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 trip = pd.read_csv('./tripulacao.csv', delimiter=';')
-trip['NIP'] = trip.NIP.str.remove('.')
+trip['NIP'] = trip.NIP.str.replace('.', '')
 
 st.dataframe(trip)
 
