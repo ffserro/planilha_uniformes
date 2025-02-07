@@ -15,4 +15,4 @@ if 'logged' not in st.session_state:
 
 else:
   mil = trip[trip.NIP==st.session_state['nip']]
-  st.markdown(f'##Seja bem vindo, {mil.POSTO} {mil.NOME}.')
+  st.markdown(f'<h2>Seja bem vindo, {mil.POSTO.iloc[0]} {mil.NOME.iloc[0]}.</h2>', unsafe_allow_html=True)
