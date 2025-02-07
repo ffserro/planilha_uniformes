@@ -1,4 +1,9 @@
 import streamlit as st
+import pandas as pd
+
+trip = df.read_csv('./tripulacao.csv', delimiter=';')
+
+st.dataframe(trip)
 
 st.title('Aquisição de uniformes')
 
