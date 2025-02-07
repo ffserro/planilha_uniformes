@@ -22,5 +22,11 @@ else:
     st.write('A indenização destes uniformes será realizada através de desconto em BP ou pagamento de GRU para Oficiais, suboficiais e sargentos; e através de CREDIFARDA para cabos e marinheiros.')
     st.session_state['inicio'] = st.button('Preencher formulário')
   elif st.session_state['inicio']:
-    st.write('formulário')
+    with st.form('formulario'):
+      tam_op3 = st.selectbox('Tamanho do Macacão Operativo OP3', ['-', 'P', 'M', 'G', 'GG', 'XG'])
+      qtd_op3 = st.number_input('Quantidade de Macacões Operativos', step=1, format='%d')
+      qtd_bon = st.number_input('Quantidade de Bonés de Viagem (Novo modelo)', step=1, format='%d')
+      if st.form_submit_button('Enviar'):
+        st.write(tam_op3, qtd_op3, qtd_bon)
+      
     
